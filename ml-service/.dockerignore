@@ -1,0 +1,12 @@
+.git
+.gitignore
+node_modules
+__pycache__
+venv
+.venv
+.env
+.env.*
+build
+dist
+.next
+README.md

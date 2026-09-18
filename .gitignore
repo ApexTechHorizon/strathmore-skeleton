@@ -1,0 +1,12 @@
+.DS_Store
+node_modules/
+__pycache__/
+venv/
+.venv/
+.env
+.env.local
+build/
+dist/
+.next/
+models/
+data/*.csv

@@ -1,0 +1,36 @@
+# secrets
+.env
+.env.local
+.env.*.local
+
+# dependencies
+node_modules/
+__pycache__/
+venv/
+.venv/
+*.pyc
+
+# builds
+build/
+dist/
+.next/
+out/
+
+# data and models (too big for git)
+data/*.csv
+data/*.json
+*.pkl
+*.joblib
+*.h5
+
+# signing — NEVER commit these
+*.keystore
+*.jks
+*.p12
+key.properties
+
+# editor / os
+.DS_Store
+.idea/
+.vscode/
+*.swp
