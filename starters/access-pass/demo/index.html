@@ -1,0 +1,31 @@
+<!doctype html>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>access-pass — demo</title>
+<style>
+ body{font:15px/1.6 Georgia,serif;max-width:680px;margin:40px auto;padding:0 20px;color:#1a1a1a}
+ h1{font-size:22px;color:#16314d;margin-bottom:2px} .s{color:#6b6b6b;font-style:italic;margin-top:0}
+ textarea{width:100%;height:110px;font:12px Courier,monospace;padding:10px;
+   border:1px solid #d4cfc7;border-radius:4px}
+ button{font:600 14px system-ui;background:#16314d;color:#fff;border:0;border-radius:4px;
+   padding:9px 18px;cursor:pointer;margin-top:10px}
+ pre{background:#f2f1ee;border:1px solid #d4cfc7;border-radius:4px;padding:12px;
+   font-size:12px;overflow-x:auto;white-space:pre-wrap}
+</style>
+<h1>access-pass</h1>
+<p class="s">U-CS 44 — QR Digital Access</p>
+<textarea id="in">{ "token": "..." }</textarea>
+<button onclick="go()">Send</button>
+<pre id="out">POST /pass/verify</pre>
+<script>
+const API = 'http://localhost:8000';
+async function go() {
+  const out = document.getElementById('out');
+  out.textContent = 'working...';
+  try {
+    const r = await fetch(API + '/pass/verify', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: document.getElementById('in').value });
+    out.textContent = JSON.stringify(await r.json(), null, 2);
+  } catch (e) { out.textContent = 'Error: ' + e.message + '\n\nIs the service running?'; }
+}
+</script>

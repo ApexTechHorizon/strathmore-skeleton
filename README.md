@@ -1,87 +1,111 @@
-# Project Skeleton
+# Strathmore Use-Case Skeleton
 
-Starting point for Strathmore use-case projects on **Wasaa Lifestyle** and **Career Mentor OS**.
+Starting point for the Strathmore use-case projects on **Wasaa Lifestyle** and
+**Career Mentor OS**.
 
-Copy this whole folder, rename it to your project, and start filling it in.
+---
+
+## Students: start here
+
+**Find your folder in `starters/`.** It is already filled in with your contract — your
+endpoint, what goes in, what comes out, who you depend on, and who depends on you.
+
+| | |
+|---|---|
+| `starters/<your-name>/` | **Your project.** Copy this out and make it your own repo |
+| `documents/` | Templates for the write-up. Copy in the ones you need |
+| `platform/` | Benjamin's integration layer. **You can ignore this** |
+
+### Getting your own copy
 
 ```bash
-cp -r strathmore-skeleton my-project
-cd my-project
+git clone --depth 1 https://github.com/ApexTechHorizon/strathmore-skeleton.git
+cp -r strathmore-skeleton/starters/<your-name> ~/my-project
+cp -r strathmore-skeleton/documents ~/my-project/documents
+cd ~/my-project && git init -b main
 ```
 
-## What is in here
+Then create an empty repo on GitHub **under your own account**, named after your use case,
+and push to it. Add Benjamin as a collaborator and send him the link.
 
-| Folder | What it is for |
-|---|---|
-| `documents/` | The write-up. Start here, before you write code. See `documents/00-START-HERE.md` |
-| `ml-service/` | Your model, served over HTTP. **Most of you live here** |
-| `backend/` | The API server, if your use case needs one |
-| `web-client/` | The user-facing web app |
-| `web-admin/` | The internal console |
-| `flutter/` | The mobile app |
+### Run it
 
-Every code folder contains the same five files:
+```bash
+python3 -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8000
+```
 
-| File | What it does |
-|---|---|
-| `Dockerfile` | Packages the app so it runs the same everywhere — on your laptop and on the host |
-| `.dockerignore` | Keeps junk out of the Docker image (node_modules, .env, .git) |
-| `.gitignore` | Keeps secrets, dependencies and big files out of git. **Read it before your first commit** |
-| `.env.example` | The variable names your app needs. Copy to `.env` and fill in. Never commit `.env` |
-| `README.md` | How to run this folder. Replace it with real instructions as you build |
+Open <http://localhost:8000/docs> for interactive API docs, or `demo/index.html` for the
+mini app. `pytest -q` runs the contract test.
 
-`ml-service/` also has `app/main.py` — a working FastAPI service with a `/health` endpoint and a
-placeholder that returns a constant, labelled `baseline: constant prediction`. Replace the
-placeholder with the endpoint from your card.
+---
 
-**You will not need all of these.** Most use cases are one service plus a small page to demo it.
-Delete the folders you are not using — an empty folder in a repo is noise.
+## The 18 starters
 
-## Every folder is its own repository
+### Wasaa Lifestyle — Friday 2 October
 
-`backend`, `ml-service`, `web-client`, `web-admin` and `flutter` each get their own GitHub repo
-and their own deploy. They are separate things with separate lifecycles.
+| Folder | Use case | What your service does |
+|---|---|---|
+| `budget-forecast` | U-CS 37 | What a household will spend next month, per category |
+| `spend-advisor` | U-CS 38 | Three things they could do differently, with shilling figures |
+| `marketplace-search` | U-CS 39 | Better search results, and spotting manipulated reviews |
+| `provider-match` | U-CS 40 | Rank providers most likely to finish the job well |
+| `scheduling` | U-CS 41 | Correct slots, and predicting no-shows |
+| `wallet-checks` | U-CS 42 | Prove the money is always correct |
+| `dependant-costs` | U-CS 43 | What supporting a child costs over 1, 5 and 10 years |
+| `access-pass` | U-CS 44 | A gate pass that works offline and cannot be shared |
+| `emergency-triage` | U-CS 45 | Route it, escalate it, never lose it quietly |
+| `ops-metrics` | U-CS 46 | Six numbers that drive a decision this week |
 
-Each one already has a `Dockerfile`, a `.gitignore` and a `.env.example`, so it can be built and
-hosted from day one.
+### Career Mentor OS — Friday 16 October
 
-See `documents/GIT_AND_DEPLOYMENT.md` for the exact commands.
+| Folder | Use case | What your service does |
+|---|---|---|
+| `skills-gap` | U-CS 3 | What can they do, what are they missing. **Two teams wait on you** |
+| `career-path` | U-CS 1 | The realistic next role |
+| `matching` | U-CS 2 | Which mentor, within budget and availability |
+| `chatbot` | U-CS 4 | Answers the easy questions, hands over when hard |
+| `session-value` | U-CS 5 | Will this session help, predicted beforehand |
+| `pricing` | U-CS 6 | A price both sides say yes to |
+| `analytics` | U-CS 7 | What a cohort did and whether it mattered |
+| `micro-learning` | U-CS 8 | The next lesson that closes a real gap |
+
+---
 
 ## The order of work
 
-1. **Fill in the Concept Note.** If you cannot, you do not understand the problem yet.
-2. **Write the contract** — the endpoint, what goes in, what comes out. It is on your card in
-   the Team Integration Map.
-3. **Build the baseline.** The dumbest version that works. Write down its number.
-4. **Decide how you measure success**, and what data you hold back to test on.
-5. **Then** build the clever version, and show it beats the baseline.
-6. **Then** deploy it and give me the URL.
+```
+baseline  ->  evaluation  ->  model  ->  integration
+```
 
-Most teams want to start at step 5. That is the mistake that costs the most marks.
+1. **Baseline.** The dumbest thing that works. Measure it. **Write the number down.**
+2. **Evaluation.** Pick your metric. Split by time, not at random. Hold the last part back.
+3. **Model.** Build the real thing. Show it beats the baseline.
+4. **Integration.** Keep the contract identical while the inside changes. Deploy. Send the URL.
+
+Most teams want to start at the model. That is the mistake that costs the most marks.
 
 ## What you hand in
 
-- A GitHub repo URL for each folder you used
-- A live URL for your service
-- A `README.md` in each repo explaining how to run it
-- The `documents/` folder, filled in
+- A GitHub repo, with Benjamin added as a collaborator
+- A live URL that answers
+- The filled-in documents
+- A README a stranger could run it from
 
-## Rules that are not negotiable
+## Rules
 
 - **No secrets in git.** No `.env`, no keys, no keystores. Commit `.env.example` instead.
-- **Staging only.** No production data, no real user records, no live M-Pesa.
 - **Label synthetic data as synthetic** — in the code and in the report.
+- **Staging only.** No production data, no live M-Pesa.
 - **Money is decimal, never float.**
-- If you find a real bug in our platform, tell me the same day.
+- Tell Benjamin the same day if you find a real bug in the platform.
 
-## Quick start per folder
+---
 
-```bash
-# ml-service (Python)
-cd ml-service && pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
-curl http://localhost:8000/health
+## For the engineer-in-charge
 
-# any folder, with Docker
-docker build -t my-service . && docker run -p 8000:8000 my-service
-```
+`platform/` holds the integration layer. `platform/backend/src/modules/` has one adapter per
+team: set `<NAME>_SERVICE_URL` in `.env` and it calls their hosted service. Until a URL is set
+the adapter returns a clean `503`, so one late team never takes the platform down.
+`GET /<module>/status` reports whether a service is configured and up.
