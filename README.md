@@ -14,6 +14,8 @@ endpoint, what goes in, what comes out, who you depend on, and who depends on yo
 |---|---|
 | `starters/<your-name>/` | **Your project.** Copy this out and make it your own repo |
 | `documents/` | Templates for the write-up. Copy in the ones you need |
+Stuck on how to connect your work, or where the data is? **[INTEGRATION.md](INTEGRATION.md)** answers both.
+
 | `platform/` | Benjamin's integration layer. **You can ignore this** |
 
 ### Getting your own copy
