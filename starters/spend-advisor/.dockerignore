@@ -1,0 +1,9 @@
+.env
+.env.*
+!.env.example
+.venv
+venv
+var
+**/__pycache__
+.pytest_cache
+**/*.sqlite3*
