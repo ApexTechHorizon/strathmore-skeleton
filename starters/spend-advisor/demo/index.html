@@ -1,31 +1,40 @@
 <!doctype html>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>spend-advisor — demo</title>
-<style>
- body{font:15px/1.6 Georgia,serif;max-width:680px;margin:40px auto;padding:0 20px;color:#1a1a1a}
- h1{font-size:22px;color:#16314d;margin-bottom:2px} .s{color:#6b6b6b;font-style:italic;margin-top:0}
- textarea{width:100%;height:110px;font:12px Courier,monospace;padding:10px;
-   border:1px solid #d4cfc7;border-radius:4px}
- button{font:600 14px system-ui;background:#16314d;color:#fff;border:0;border-radius:4px;
-   padding:9px 18px;cursor:pointer;margin-top:10px}
- pre{background:#f2f1ee;border:1px solid #d4cfc7;border-radius:4px;padding:12px;
-   font-size:12px;overflow-x:auto;white-space:pre-wrap}
-</style>
-<h1>spend-advisor</h1>
-<p class="s">U-CS 38 — AI Spending Optimization</p>
-<textarea id="in">{ "userId": "...", "month": 6, "year": 2026 }</textarea>
-<button onclick="go()">Send</button>
-<pre id="out">POST /recommendations</pre>
-<script>
-const API = 'http://localhost:8000';
-async function go() {
-  const out = document.getElementById('out');
-  out.textContent = 'working...';
-  try {
-    const r = await fetch(API + '/recommendations', {
-      method: 'POST', headers: {'Content-Type': 'application/json'},
-      body: document.getElementById('in').value });
-    out.textContent = JSON.stringify(await r.json(), null, 2);
-  } catch (e) { out.textContent = 'Error: ' + e.message + '\n\nIs the service running?'; }
-}
-</script>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>U-CS38 — spend-advisor demo</title>
+  <style>
+    body{font:16px/1.6 system-ui;max-width:760px;margin:32px auto;padding:0 18px;color:#18392d;background:#f8fcfa}
+    label{display:block;margin-top:12px} input,button{font:inherit;padding:10px;box-sizing:border-box;max-width:100%}
+    input{width:100%} button{background:#176744;color:white;border:0;border-radius:5px;margin:8px 8px 8px 0;cursor:pointer}
+    button:disabled{opacity:.6;cursor:wait} :focus-visible{outline:3px solid #9c5100;outline-offset:3px}
+    article{padding:16px;margin:16px 0;border:1px solid #668b78;border-radius:8px;background:white}
+    #status{min-height:2em} pre{white-space:pre-wrap;overflow-wrap:anywhere} .note{border-left:4px solid #176744;padding-left:12px}
+  </style>
+</head>
+<body>
+  <h1>spend-advisor · U-CS38</h1>
+  <p class="note">Synthetic demonstration only. Up to three conditional planning suggestions, not forecasts or guaranteed savings.</p>
+  <form id="request">
+    <fieldset id="controls">
+      <legend>Controlled staging operator demo</legend>
+      <label for="key">Service key (kept only in this page's memory; never saved)</label>
+      <input id="key" type="password" autocomplete="off" required>
+      <label for="household">Synthetic household ID</label>
+      <input id="household" value="demo-household" maxlength="128" required>
+      <label for="month">Budget month</label>
+      <input id="month" type="number" min="1" max="12" value="6" required>
+      <label for="year">Budget year</label>
+      <input id="year" type="number" min="2000" max="2100" value="2026" required>
+      <button type="submit">Get suggestions</button>
+    </fieldset>
+  </form>
+  <p id="status" role="status" aria-live="polite"></p>
+  <section id="items" aria-label="Recommendations"></section>
+  <h2>Acceptance accounting</h2>
+  <p>Counts below are synthetic test decisions, not measured human adoption or money saved.</p>
+  <pre id="metrics">No request yet.</pre>
+  <script src="/demo/app.js" defer></script>
+</body>
+</html>

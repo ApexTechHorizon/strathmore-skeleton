@@ -1,0 +1,13 @@
+{
+  "isSynthetic": true,
+  "budgets": [
+    {"userId":"demo-household","month":6,"year":2026,"targetId":"demo-entertainment","category":"Entertainment","allocatedKes":"5000.00","actualKes":"6500.00","approved":true},
+    {"userId":"demo-household","month":6,"year":2026,"targetId":"demo-data","category":"Airtime and Data","allocatedKes":"1200.00","actualKes":"1800.00","approved":true},
+    {"userId":"demo-household","month":6,"year":2026,"targetId":"demo-transport","category":"Transport","allocatedKes":"4400.00","actualKes":"4800.00","approved":true},
+    {"userId":"demo-household","month":6,"year":2026,"targetId":"demo-groceries","category":"Groceries","allocatedKes":"6000.00","actualKes":"6200.00","approved":true},
+    {"userId":"demo-household","month":6,"year":2026,"targetId":"demo-rent","category":"Rent","allocatedKes":"15000.00","actualKes":"18000.00","approved":true},
+    {"userId":"demo-household","month":6,"year":2026,"targetId":"demo-medical","category":"Medical","allocatedKes":"1000.00","actualKes":"3000.00","approved":true},
+    {"userId":"demo-household","month":7,"year":2026,"targetId":"demo-july-transport","category":"Transport","allocatedKes":"4400.00","actualKes":"4200.00","approved":true},
+    {"userId":"demo-other-household","month":6,"year":2026,"targetId":"demo-other-data","category":"Airtime and Data","allocatedKes":"1000.00","actualKes":"1100.01","approved":true}
+  ]
+}
